@@ -2,9 +2,9 @@ const mysql = require('mysql2/promise');
 
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'root',            // ganti jika bukan 'root'
+  user: 'root',
   password: '',
-  database: 'worldbank_db',
+  database: 'db_tugasmdik',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
