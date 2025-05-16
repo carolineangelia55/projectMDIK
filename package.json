@@ -1,18 +1,24 @@
 {
   "name": "worldbank-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["express", "worldbank", "api", "statistik", "REST"],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
     "pg": "^8.16.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

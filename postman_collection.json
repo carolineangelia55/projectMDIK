@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "World Bank API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    { "name": "List Topik",    "request": { "method":"GET", "url":"{{base_url}}/topik" } },
+    { "name": "Indikator by Topik", "request": { "method":"GET", "url":"{{base_url}}/indikator/topik/1" } },
+    { "name": "List Negara",    "request": { "method":"GET", "url":"{{base_url}}/negara" } },
+    { "name": "List Statistik", "request": {
+        "method":"GET",
+        "url":"{{base_url}}/statistik",
+        "query":[
+          { "key":"page","value":"1" },
+          { "key":"limit","value":"10" },
+          { "key":"id_indikator","value":"2" }
+        ]
+    }}
+  ]
+}

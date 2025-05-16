@@ -1,0 +1,13 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 120
+      arrivalRate: 20
+scenarios:
+  - flow:
+      - get:
+          url: "/statistik?page=1&limit=10&id_indikator=2"
+      - get:
+          url: "/statistik?page=1&limit=5&id_negara=3&tahun=2020"
+      - get:
+          url: "/topik"
