@@ -64,7 +64,7 @@ exports.getIndikatorByTopik = async (req, res) => {
     const total = parseInt(jum[0].jum);
     const total_pages = Math.ceil(total / limit);
 
-    $sql += "ORDER BY ? ";
+    sql += "ORDER BY ? ";
     vals.push(sort_filter);
     vals.push(limit);
     vals.push(offset);

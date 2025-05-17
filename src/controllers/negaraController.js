@@ -1,16 +1,20 @@
 const db = require('../models/db');
 
-exports.getAllTopik = async (req, res) => {
+exports.getAllNegara = async (req, res) => {
   Object.keys(req.query).forEach((key) => {
-    if (key != "page" && key != "limit" && key != "parent" && key != "sort_column" && key != "sort_order") {
+    if (key != "page" && key != "limit" && key != "income" && key != "daerah" && key != "sort_column" && key != "sort_order") {
       return res.status(400).json({ status: 'error', message: 'Parameter tidak ditemukan'});
     }
   });
 
   vals = [];
-  if (req.query.parent) {
-    topik = req.query.parent;
-    namaTopikList = topik.split(':').map(s => s.trim());
+  if (req.query.income) {
+    inc = req.query.income;
+    vals.push(inc);
+  }
+  if (req.query.daerah) {
+    dae = req.query.daerah;
+    vals.push(dae);
   }
   if (req.query.page) {
     page = parseInt(req.query.page);
@@ -22,7 +26,7 @@ exports.getAllTopik = async (req, res) => {
   } else {
     limit = 20;
   }
-  if (req.query.sort_column) {
+    if (req.query.sort_column) {
     sort_col = req.query.sort_column;
   } else {
     sort_col = "id_indikator";
@@ -36,41 +40,52 @@ exports.getAllTopik = async (req, res) => {
   offset = (page - 1) * limit;
 
   try {
-    if (req.query.parent) {
-      induk_id = 0;
-      for (const nama of namaTopikList) {
-        const sql = `SELECT id_topik FROM topik WHERE nama_topik = ? AND induk_topik = ? LIMIT 1`;
-        const [rows] = await db.query(sql, [nama, induk_id]);
-
-        if (rows.length === 0) {
-          throw new Error(`Topik '${topik}' tidak ditemukan`);
-        }
-
-        topik_id = rows[0].id_topik;
-        induk_id = topik_id; // untuk pencarian berikutnya
+    sql = `
+      SELECT id_negara, kode_negara, nama_negara 
+      FROM negara n `;
+    sqlJum = `SELECT COUNT(*) as jum 
+      FROM negara n `;
+    if (req.query.income) {
+      sql += `LEFT JOIN income i 
+      ON n.id_income = i.id_income `;
+      sqlJum += `LEFT JOIN income i 
+      ON n.id_income = i.id_income `;
+    }
+    if (req.query.daerah) {
+      sql += `LEFT JOIN daerah d 
+      ON n.id_daerah = d.id_daerah `;
+      sqlJum += `LEFT JOIN daerah d 
+      ON n.id_daerah = d.id_daerah `;
+    }
+    if (req.query.income) {
+      sql += `WHERE jenis_income = ? `;
+      sqlJum += `WHERE jenis_income = ? `;
+    }
+    if (req.query.daerah) {
+      if (req.query.income) {
+        sql += `AND `;
+        sqlJum += `AND `;
+      } else {
+        sql += `WHERE `;
+        sqlJum += `WHERE `;
       }
-      vals.push(topik_id);
+      sql += `nama_daerah = ? `;
+      sqlJum += `nama_daerah = ? `;
     }
 
-    sql = 'SELECT * FROM topik ';
-    sqlJum = 'SELECT COUNT(*) as jum FROM topik ';
-    if (req.query.parent) {
-      sql += `WHERE induk_topik = ? `;
-      sqlJum += `WHERE induk_topik = ? `;
-    }
     const [ jum ] = await db.query(sqlJum, vals);
     const total = parseInt(jum[0].jum);
     const total_pages = Math.ceil(total / limit);
 
-    $sql += "ORDER BY ? ";
+    sql += "ORDER BY ? ";
     vals.push(sort_filter);
     vals.push(limit);
     vals.push(offset);
-    sql += `LIMIT ? OFFSET ?`;
 
-    const [rows] = await db.query(sql, vals);
-    res.json({ status: 'success', message: 'Data fetched successfully', page: page, total_pages:total_pages, data: rows });
+    sql += `LIMIT ? OFFSET ?`;
+    const [ rows ] = await db.query(sql, vals);
+    res.json({ status:'success',  message: 'Data fetched successfully', page: page, total_pages:total_pages, data: rows });
   } catch (err) {
-    res.status(500).json({ status: 'error', message: err.message });
+    res.status(500).json({ status:'error', message: err.message });
   }
 };
