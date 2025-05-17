@@ -29,7 +29,7 @@ exports.getAllNegara = async (req, res) => {
     if (req.query.sort_column) {
     sort_col = req.query.sort_column;
   } else {
-    sort_col = "id_indikator";
+    sort_col = "id_negara";
   }
   if (req.query.sort_order) {
     sort_order = req.query.sort_order;
