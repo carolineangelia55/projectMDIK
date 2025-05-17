@@ -16,6 +16,7 @@ app.use('/indikator', indikatorRoutes);
 app.use('/statistik', statistikRoutes);
 app.use('/negara', negaraRoutes);
 app.use('/topik', topikRoutes);
+app.use('/data', dataRoutes);
 
 app.get('/', (req, res) => res.send('API World Bank Running'));
 
