@@ -2,7 +2,7 @@ const db = require('../models/db');
 
 exports.getAllNegara = async (req, res) => {
   Object.keys(req.query).forEach((key) => {
-    if (key != "page" && key != "limit" && key != "income" && key != "daerah" && key != "sort_column" && key != "sort_order") {
+    if (key != "page" && key != "limit" && key != "income" && key != "daerah" && key != "sort_by" && key != "order") {
       return res.status(400).json({ status: 'error', message: 'Parameter tidak ditemukan'});
     }
   });
@@ -26,13 +26,13 @@ exports.getAllNegara = async (req, res) => {
   } else {
     limit = 20;
   }
-    if (req.query.sort_column) {
-    sort_col = req.query.sort_column;
+    if (req.query.sort_by) {
+    sort_col = req.query.sort_by;
   } else {
     sort_col = "id_negara";
   }
-  if (req.query.sort_order) {
-    sort_order = req.query.sort_order;
+  if (req.query.order) {
+    sort_order = req.query.order;
   } else {
     sort_order = "ASC";
   }
