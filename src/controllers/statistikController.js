@@ -28,7 +28,7 @@ exports.listStatistik = async (req, res) => {
     LIMIT $${vals.length-1} OFFSET $${vals.length}`;
   const data = await db.query(sql, vals);
 
-  // Hitung total pages (opsional, bisa dioptimalkan)
+  // Hitung total pages
   const countSql = `SELECT COUNT(*) FROM statistik s ${where}`;
   const { rows } = await db.query(countSql, vals.slice(0, vals.length-2));
   const total = parseInt(rows[0].count);

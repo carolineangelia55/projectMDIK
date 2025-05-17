@@ -7,6 +7,7 @@ const indikatorRoutes = require('./routes/indikator');
 const statistikRoutes = require('./routes/statistik');
 const negaraRoutes    = require('./routes/negara');
 const topikRoutes     = require('./routes/topik');
+const dataRoutes = require('./routes/data');
 
 const app = express();
 app.use(cors(), express.json());
