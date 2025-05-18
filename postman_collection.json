@@ -4,17 +4,56 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
-    { "name": "List Topik",    "request": { "method":"GET", "url":"{{base_url}}/topik" } },
-    { "name": "Indikator by Topik", "request": { "method":"GET", "url":"{{base_url}}/indikator/topik/1" } },
-    { "name": "List Negara",    "request": { "method":"GET", "url":"{{base_url}}/negara" } },
-    { "name": "List Statistik", "request": {
-        "method":"GET",
-        "url":"{{base_url}}/statistik",
-        "query":[
-          { "key":"page","value":"1" },
-          { "key":"limit","value":"10" },
-          { "key":"id_indikator","value":"2" }
-        ]
-    }}
+    {
+      "name": "List Topik",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/topik"
+      }
+    },
+    {
+      "name": "List Indikator",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/indikator"
+      }
+    },
+    {
+      "name": "Indikator by Topik",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/indikator/topik/1"
+      }
+    },
+    {
+      "name": "List Negara",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/negara"
+      }
+    },
+    {
+      "name": "List Statistik",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/statistik?page=1&limit=10&id_indikator=2",
+          "host": ["{{base_url}}"],
+          "path": ["statistik"],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "10" },
+            { "key": "id_indikator", "value": "2" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "List Data",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/data"
+      }
+    }
   ]
 }
