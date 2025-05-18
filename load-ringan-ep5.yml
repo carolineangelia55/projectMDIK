@@ -1,0 +1,10 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 180       
+      arrivalCount: 100
+
+scenarios:
+  - flow:
+      - get:
+          url: "http://localhost:3000/statistik?page=1&limit=20&id_indikator=5&id_negara=7&tahun=2023&sort=value_indikator&order=desc"

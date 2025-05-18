@@ -1,0 +1,11 @@
+http://localhost:3000/indikator?page=1&limit=20&topik=Economic%20Policy%20%26%20Debt:Official%20development%20assistance&sort_by=nama_indikator&order=desc
+
+http://localhost:3000/negara?page=1&limit=20&daerah=East%20Asia%20%26%20Pacific&income=High%20income&sort_by=nama_negara&order=desc
+
+http://localhost:3000/topik?page=1&limit=10&parent=Environment&sort_by=nama_topik&order=desc
+
+http://localhost:3000/statistik?page=1&limit=20
+
+http://localhost:3000/statistik?page=1&limit=20&id_indikator=5&id_negara=7&tahun=2023&sort=value_indikator&order=desc
+
+artillery run statistik-load-test.yml

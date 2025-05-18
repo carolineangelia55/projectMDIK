@@ -1,0 +1,10 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 180       
+      arrivalRate: 100
+
+scenarios:
+  - flow:
+      - get:
+          url: "http://localhost:3000/statistik?page=1&limit=20"

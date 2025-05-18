@@ -7,7 +7,19 @@ exports.getAllTopik = async (req, res) => {
     }
   });
 
-  vals = [];
+  let vals = [];
+  let topik;
+  let namaTopikList;
+  let page;
+  let limit;
+  let sort_col; 
+  let sort_order;
+  let offset;
+  let induk_id;
+  let topik_id;
+  let sql; 
+  let sqlJum;
+
   if (req.query.parent) {
     topik = req.query.parent;
     namaTopikList = topik.split(':').map(s => s.trim());
@@ -32,7 +44,6 @@ exports.getAllTopik = async (req, res) => {
   } else {
     sort_order = "ASC";
   }
-  sort_filter = sort_col+" "+sort_order;
   offset = (page - 1) * limit;
 
   try {
@@ -71,5 +82,6 @@ exports.getAllTopik = async (req, res) => {
     res.json({ status: 'success', message: 'Data fetched successfully', page: page, total_pages:total_pages, data: rows });
   } catch (err) {
     res.status(500).json({ status: 'error', message: err.message });
+    console.log(err.message);
   }
 };

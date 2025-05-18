@@ -7,7 +7,17 @@ exports.getAllNegara = async (req, res) => {
     }
   });
 
-  vals = [];
+  let vals = [];
+  let inc;
+  let dae;
+  let page;
+  let limit;
+  let sort_col;
+  let sort_order;
+  let offset;
+  let sql;
+  let sqlJum;
+  
   if (req.query.income) {
     inc = req.query.income;
     vals.push(inc);
@@ -36,7 +46,6 @@ exports.getAllNegara = async (req, res) => {
   } else {
     sort_order = "ASC";
   }
-  sort_filter = sort_col+" "+sort_order;
   offset = (page - 1) * limit;
 
   try {
@@ -86,5 +95,6 @@ exports.getAllNegara = async (req, res) => {
     res.json({ status:'success',  message: 'Data fetched successfully', page: page, total_pages:total_pages, data: rows });
   } catch (err) {
     res.status(500).json({ status:'error', message: err.message });
+    console.log(err.message);
   }
 };

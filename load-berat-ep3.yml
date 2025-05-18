@@ -1,0 +1,10 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 180       
+      arrivalRate: 500
+
+scenarios:
+  - flow:
+      - get:
+          url: "http://localhost:3000/topik?page=1&limit=10&parent=Environment&sort_by=nama_topik&order=desc"

@@ -7,8 +7,8 @@ const db = mysql.createPool({
   password: '',
   database: 'db_mdik',
   waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+  connectionLimit: 10000,
+  queueLimit: 10000
 });
 
 module.exports = db;
